@@ -1,0 +1,32 @@
+title: Suspicious Access Attempt to LSASS or PPAC-Protected Process
+id: 9059ae82-b3a4-4ed7-a275-f6f134847911
+description: Detects possible PPAC/LSA protection bypass attempts via direct access to protected processes
+author: Cyber Graf
+
+logsource:
+  category: sysmon
+  product: windows
+
+detection:
+  selection:
+    EventID: 10
+    TargetImage|endswith:
+      - '\lsass.exe'
+      - '\winlogon.exe'
+      - '\services.exe'
+    GrantedAccess: 
+      - '0x1410'
+      - '0x1438'
+      - '0x1fffff'  # Полный доступ — часто в обходах
+  condition: selection
+
+level: high
+
+tags:
+  - attack.credential_access
+  - attack.defense_evasion
+  - T1003.001
+  - PPAC
+  - AdministratorProtection
+
+license: CC BY 4.0

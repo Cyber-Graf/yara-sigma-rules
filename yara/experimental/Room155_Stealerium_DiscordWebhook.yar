@@ -2,7 +2,7 @@ rule Room155_Stealerium_DiscordWebhook
 {
     meta:
         description = "Detects Stealerium sample with Discord webhook exfiltration used by room155"
-        author = "CyberGraf"
+        author = "Cyber Graf"
         version = "1.2"
         hash1 = "6a851b7e10b8a5b6772ba6f75fdd575d"
         reference = "F6 report: room155"

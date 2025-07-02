@@ -1,0 +1,29 @@
+title: PowerShell Defender Evasion via Add-MpPreference
+id: f6-miner-defender-evasion
+description: Detects PowerShell-based bypass of Windows Defender by altering exclusion lists
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+reference: https://www.f6.ru/research/miner-flibusta
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection:
+    Image|endswith: '\powershell.exe'
+    CommandLine|contains:
+      - 'Add-MpPreference'
+      - 'Set-MpPreference'
+      - 'ExclusionPath'
+      - 'ExclusionExtension'
+  condition: selection
+
+level: high
+
+tags:
+  - attack.defense_evasion
+  - T1562.001
+  - SilentCryptoMiner
+  - PowerShell

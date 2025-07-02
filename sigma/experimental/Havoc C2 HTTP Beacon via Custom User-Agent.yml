@@ -1,0 +1,26 @@
+title: Havoc C2 HTTP Beacon via Custom User-Agent
+id: f41870b7-3b7e-42b6-91ec-2aafd5e7c1a7
+description: Detects HTTP beaconing by Havoc C2 using distinct user-agent and URI path
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: webproxy
+  product: windows
+
+detection:
+  selection:
+    http_method: POST
+    http_user_agent|contains: "HavocClient"
+    url|contains: "/ads/update"
+  condition: selection
+
+level: high
+
+tags:
+  - attack.command_and_control
+  - beacon
+  - havoc
+  - C2
+  - redteam

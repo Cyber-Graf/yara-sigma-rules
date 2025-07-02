@@ -1,0 +1,31 @@
+title: Prometei ELF Dropper Download via HTTP
+id: 44a16a72-b74e-4ea2-a94e-5f4311dfabc3
+description: Detects HTTP GET requests used to fetch Prometei Linux malware disguised as .php
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: firewall
+  category: network_connection
+
+detection:
+  selection:
+    http_method: GET
+    url|contains|all:
+      - "/k.php"
+      - "a=x86_64"
+    dest_ip|contains:
+      - "103.41.204.104"
+      - "152.36.128.18"
+  condition: selection
+
+level: high
+
+tags:
+  - attack.command_and_control
+  - malware.download
+  - linux
+  - prometei
+  - upx
+  - json_config

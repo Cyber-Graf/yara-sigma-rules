@@ -1,0 +1,38 @@
+title: Suspicious Script Execution with Shellcode Indicators
+id: 20efc33d-94e8-41fc-b6f0-01cf3ccf7d11
+description: Detects potentially malicious script interpreters executing memory allocation or thread creation functions, often indicative of shellcode injection
+author: Cyber Graf
+status: experimental
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  selection_images:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\wscript.exe'
+      - '\cscript.exe'
+      - '\rundll32.exe'
+      - '\mshta.exe'
+      - '\regsvr32.exe'
+  selection_cmd:
+    CommandLine|contains:
+      - 'VirtualAlloc'
+      - 'CreateThread'
+      - 'shellcode'
+      - '0xC0000409'
+      - 'NtAllocateVirtualMemory'
+      - 'NtCreateThreadEx'
+      - 'WriteProcessMemory'
+  condition: selection_images and selection_cmd
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.defense_evasion
+  - attack.t1055.001
+
+license: CC BY 4.0
