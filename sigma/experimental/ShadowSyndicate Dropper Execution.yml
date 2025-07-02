@@ -1,0 +1,25 @@
+title: ShadowSyndicate Dropper Execution - pdfupdate.exe
+id: 9e5f2e88-2473-4c4e-bf74-shadow-pdfexec
+description: Detects execution of a suspicious binary masquerading as PDF updater
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  selection:
+    Image|endswith: 
+      - '\pdfupdate.exe'
+      - '\pdfupdater.exe'
+  condition: selection
+
+level: medium
+
+tags:
+  - attack.defense_evasion
+  - attack.t1036
+  - ShadowSyndicate
+  - APT
