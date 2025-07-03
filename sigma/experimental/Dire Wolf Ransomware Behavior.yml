@@ -1,0 +1,34 @@
+title: Dire Wolf Ransomware Behavior
+id: direwolf-behavior-2025
+description: Detects behavior related to Dire Wolf ransomware including shadow copy deletion, persistence via registry, and scheduled tasks
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+reference: https://www.trustwave.com/resources/blogs/spiderlabs-blog/dire-wolf-strikes/
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  shadow_deletion:
+    CommandLine|contains:
+      - 'vssadmin delete shadows'
+      - 'wmic shadowcopy delete'
+  schtasks_creation:
+    Image|endswith: '\schtasks.exe'
+    CommandLine|contains: ' /create'
+  registry_persistence:
+    CommandLine|contains:
+      - 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
+
+  condition: 1 of them
+level: high
+
+tags:
+  - ransomware
+  - direwolf
+  - T1053.005
+  - T1112
+  - T1490
+  - ThreatIntel
