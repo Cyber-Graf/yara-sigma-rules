@@ -1,0 +1,28 @@
+title: Suspicious PowerShell via Obfuscated JS (Remcos)
+id: remcos-js-powershell
+description: Detects PowerShell launched via browser, matching Remcos dropper patterns
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection:
+    ParentImage|contains:
+      - 'chrome'
+      - 'msedge'
+      - 'firefox'
+    CommandLine|contains|all:
+      - 'powershell'
+      - '-w hidden'
+      - 'nop'
+  condition: selection
+level: high
+tags:
+  - T1059.001
+  - Remcos
+  - BrowserDropper
+  - ANYRUN
