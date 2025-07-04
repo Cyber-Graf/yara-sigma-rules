@@ -1,0 +1,37 @@
+title: DCRAT Persistence via schtasks and Registry Run Key
+id: 4ee967b1-8c95-4c59-88ff-39f5ec804e4a
+description: Detects persistence behavior used by DCRAT via task scheduler and autorun registry key
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  schtasks_creation:
+    Image|endswith: '\schtasks.exe'
+    CommandLine|contains|all:
+      - '/create'
+      - '/sc onlogon'
+
+logsource2:
+  category: registry_event
+
+detection:
+  reg_autorun:
+    TargetObject|contains: 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
+    Details|contains: '.exe'
+
+  condition: schtasks_creation or reg_autorun
+
+level: high
+
+tags:
+  - attack.persistence
+  - attack.t1053.005
+  - attack.t1547.001
+  - DCRAT
+  - registry_autorun
+  - scheduled_task
