@@ -1,18 +1,26 @@
-# YARA and Sigma Detection Rules
+🧬 Cyber Graf — YARA & SIGMA Rules
 
-This repository contains detection rules based on public threat intelligence reports.  
-Rules are organized by type and operating system.
+This repository contains custom detection rules developed by the [Cyber Graf](https://t.me/cyber_graf) project. 
+These rules focus on real-world threats, misconfigurations, and offensive techniques seen in malware, cloud, identity systems, and advanced adversary behavior.
 
-## 📁 Structure
-- `yara/`: YARA rules
-- `sigma/`: Sigma rules
+## Quality Policy
 
-## 🛠 Usage
-- YARA: Use the `yara` tool to scan samples.
-- Sigma: Convert rules with `sigmac` to your SIEM format (Splunk, Elastic, etc).
+- ✅ MITRE ATT&CK tags  
+- ✅ Custom UUIDs per rule  
+- ✅ Minimal false positives, context-aware  
+- ✅ Fully documented meta fields  
+- ⚠️ `experimental` status until confirmed in production
 
-## ✍️ Author
-Maintained by CyberGraf  
+---
 
-## 🔒 License
-MIT License
+## 📄 License
+
+All content is licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**  
+You are free to use, adapt, or redistribute — with attribution.
+
+---
+
+## 📬 Feedback & Contributions
+
+Found something broken? Using the rules at scale?  
+Open an [issue](https://github.com/Cyber-Graf/yara-sigma-rules/issues), submit a pull request, or contact via [Cyber Graf](https://t.me/cyber_graf).
