@@ -1,0 +1,42 @@
+title: Suspicious LNK Execution via PowerShell or CMD
+id: 8dc1f4e7-0a6d-40c9-9209-d2f69b29e37c
+description: Detects possible malicious LNK usage to launch scripts or payloads using base64, mshta, or overlay abuse
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  suspicious_lnk_launch:
+    ParentImage|endswith:
+      - '.lnk'
+      - 'explorer.exe'
+    Image|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+      - '\forfiles.exe'
+      - '\mshta.exe'
+      - '\wscript.exe'
+    CommandLine|contains|any:
+      - 'frombase64string'
+      - 'select-string'
+      - 'findstr'
+      - '-e'
+      - 'start-process'
+      - '.Substring('
+
+  condition: suspicious_lnk_launch
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.t1204.002
+  - attack.t1059.001
+  - powershell
+  - lnk
+  - base64
+  - overlay_execution
