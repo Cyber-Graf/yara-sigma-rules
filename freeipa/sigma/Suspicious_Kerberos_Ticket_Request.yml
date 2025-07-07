@@ -1,0 +1,28 @@
+title: Suspicious Kerberos Ticket Request for Admin Accounts
+id: a9f5f17f-b5ec-4c4f-a717-5f3c78eab741
+description: Detects use of kinit or kvno targeting privileged accounts in FreeIPA environment
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: process_creation
+  product: linux
+
+detection:
+  selection:
+    Image|endswith:
+      - '/usr/bin/kinit'
+      - '/usr/bin/kvno'
+    CommandLine|contains:
+      - 'admin'
+      - 'root'
+  condition: selection
+
+level: high
+
+tags:
+  - attack.credential_access
+  - attack.t1558.003
+  - kerberos
+  - freeipa

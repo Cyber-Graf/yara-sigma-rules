@@ -1,0 +1,25 @@
+title: FreeIPA HBAC Rule Enabled (allow_all)
+id: 7ab5ed56-489c-4bd5-bc74-e876a7f728ec
+description: Detects suspicious activation of FreeIPA HBAC rule 'allow_all'
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: apache2
+  product: linux
+
+detection:
+  selection:
+    EventID|contains: "hbacrule_enable"
+    Message|contains: "allow_all"
+  condition: selection
+
+level: medium
+
+tags:
+  - attack.defense_evasion
+  - freeipa
+  - linux
+  - hbac
+  - access_control
