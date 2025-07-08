@@ -1,8 +1,8 @@
-<img src="/cyber_graf_logo.jpg" alt="Cyber Graf Logo" width="300" style="margin-bottom: 10px;"/>
-
 ## 🧬 Cyber Graf — YARA & SIGMA Rules
 
 Custom detection rules for real-world threats, misconfigurations, and offensive techniques seen in malware, cloud, identity systems, and advanced adversary behavior.
+
+![project_logo](/cyber_graf_logo.jpg)
 
 ## 📁 Repository Structure
 
