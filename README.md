@@ -3,6 +3,8 @@
 This repository contains custom detection rules developed by the [Cyber Graf](https://t.me/cyber_graf) project. 
 These rules focus on real-world threats, misconfigurations, and offensive techniques seen in malware, cloud, identity systems, and advanced adversary behavior.
 
+![project_logo](/сyber_graf_logo.jpg)
+
 ## 📁 Repository Structure
 
 The rules are organized into three main categories for clarity and scalability:
