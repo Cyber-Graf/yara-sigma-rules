@@ -3,7 +3,7 @@
 This repository contains custom detection rules. 
 These rules focus on real-world threats, misconfigurations, and offensive techniques seen in malware, cloud, identity systems, and advanced adversary behavior.
 
-![project_logo](/сyber_graf_logo.jpg)
+![project_logo](/cyber_graf_logo.jpg)
 
 ## 📁 Repository Structure
 
