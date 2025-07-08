@@ -1,0 +1,36 @@
+title: RDP Threat Detection Pack
+id: cyber-graf-rdp-pack-2025
+description: >
+  Detection rules focused on RDP abuse in Windows environments —
+  including brute-force logon chains, off-hours access, and suspiciously short sessions.
+  Based on structured event correlation using Windows Security Event Logs.
+
+version: 1.0
+author: Cyber Graf
+license: CC BY 4.0
+
+tags:
+  - windows
+  - rdp
+  - logon
+  - brute_force
+  - session_tracking
+  - lateral_movement
+  - detection_engineering
+
+references:
+  - https://github.com/Cyber-Graf/yara-sigma-rules
+  - https://sujayadkesar.github.io/rdp-logon-timeline
+
+rules:
+  - filename: rdp_bruteforce_then_success.yml
+    id: 379ccfee-e297-41c5-b84e-54725c9c3ea2
+    description: RDP success after series of failed logons
+
+  - filename: rdp_outside_business_hours.yml
+    id: 0a21b35b-bf90-4ef2-ae38-95b1c7fe9e87
+    description: RDP logon outside standard working hours
+
+  - filename: rdp_short_session.yml
+    id: e8b92010-44b2-41d5-8513-3f11c6a2a261
+    description: RDP session with immediate logoff (under 1 minute)

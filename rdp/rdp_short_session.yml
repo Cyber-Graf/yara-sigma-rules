@@ -1,0 +1,33 @@
+title: Short-lived RDP Session
+id: e8b92010-44b2-41d5-8513-3f11c6a2a261
+description: Detects RDP sessions where login is followed by immediate logoff
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: logon
+  product: windows
+
+detection:
+  logon:
+    EventID: 4624
+    LogonType: 10
+
+  logoff:
+    EventID|in:
+      - 4634
+      - 4647
+
+  timeframe: 1m
+  condition: logon and logoff
+
+level: medium
+
+tags:
+  - attack.t1078
+  - attack.t1021.001
+  - rdp
+  - windows
+  - logon
+  - session_timing

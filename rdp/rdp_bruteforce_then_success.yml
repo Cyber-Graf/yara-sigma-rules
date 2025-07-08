@@ -1,0 +1,30 @@
+title: RDP Success After Brute Force Attempt
+id: 379ccfee-e297-41c5-b84e-54725c9c3ea2
+description: Detects successful RDP login after multiple failed login attempts (likely brute-force)
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: authentication
+  product: windows
+
+detection:
+  failed:
+    EventID: 4625
+    LogonType: 10
+  success:
+    EventID: 4624
+    LogonType: 10
+
+  timeframe: 3m
+  condition: selection=success and count(failed.AccountName) > 5
+
+level: high
+
+tags:
+  - attack.brute_force
+  - attack.t1110
+  - windows
+  - rdp
+  - authentication

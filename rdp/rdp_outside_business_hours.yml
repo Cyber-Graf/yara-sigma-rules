@@ -1,0 +1,28 @@
+title: RDP Logon Outside Business Hours
+id: 0a21b35b-bf90-4ef2-ae38-95b1c7fe9e87
+description: Detects RDP logons that occur outside of typical working hours
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: authentication
+  product: windows
+
+detection:
+  selection:
+    EventID: 4624
+    LogonType: 10
+  timeframe: 1m
+  condition: selection
+
+  // Adjust this filter logic in SIEM query to apply time filter:
+  // e.g. NOT (07:00 <= TimeGenerated <= 20:00)
+
+level: medium
+
+tags:
+  - attack.t1021.001
+  - detection.rdp.anomaly
+  - windows
+  - behavior
