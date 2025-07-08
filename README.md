@@ -1,13 +1,12 @@
+<img src="/cyber_graf_logo.jpg" alt="Cyber Graf Logo" width="300" style="margin-bottom: 10px;"/>
+
 ## 🧬 Cyber Graf — YARA & SIGMA Rules
 
-This repository contains custom detection rules. 
-These rules focus on real-world threats, misconfigurations, and offensive techniques seen in malware, cloud, identity systems, and advanced adversary behavior.
-
-![project_logo](/cyber_graf_logo.jpg)
+Custom detection rules for real-world threats, misconfigurations, and offensive techniques seen in malware, cloud, identity systems, and advanced adversary behavior.
 
 ## 📁 Repository Structure
 
-The rules are organized into three main categories for clarity and scalability:
+Organized into three main categories for clarity and scalability:
 ```
 yara-sigma-rules/
 ├── attack_rules/ # Techniques and methods used in offensive operations
