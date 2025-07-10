@@ -1,0 +1,26 @@
+title: PAC Data Mismatch - Kerberos Ticket Forgery
+id: sigma-kerberos-pac-mismatch
+description: Detects possible Kerberos PAC mismatches, indicating ticket forgery (Diamond Ticket)
+author: Cyber Graf
+license: CC BY 4.0
+status: experimental
+
+logsource:
+  product: windows
+  service: security
+
+detection:
+  selection:
+    EventID: 4624
+    LogonType: 3
+    TargetUserName|endswith: "$"  # service accounts anomaly
+    TargetUserSid|contains: "-520"  # uncommon built-in SID
+  condition: selection
+
+level: high
+
+tags:
+  - kerberos
+  - pac
+  - ticket_forgery
+  - diamond_ticket

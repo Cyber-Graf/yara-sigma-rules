@@ -1,0 +1,29 @@
+title: TGS Request Without TGT - Possible Diamond Ticket
+id: sigma-kerberos-diamond-ticket
+description: Detects service ticket (TGS) requests without prior TGT issuance (AS-REQ), indicating possible forged ticket
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: windows
+  service: security
+  category: kerberos
+
+detection:
+  selection_tgs:
+    EventID: 4769  # A Kerberos service ticket was requested
+
+  filter_asreq:
+    EventID: 4768  # A Kerberos authentication ticket (TGT) was requested
+    TimeDiffMinutes|gt: 5
+
+  condition: selection_tgs and not filter_asreq
+
+level: high
+
+tags:
+  - attack.credential_access
+  - kerberos
+  - diamond_ticket
+  - forgery
