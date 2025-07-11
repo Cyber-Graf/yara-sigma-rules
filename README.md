@@ -26,3 +26,6 @@ yara-sigma-rules/
 
 Found something broken? Using the rules at scale?  
 Open an [issue](https://github.com/Cyber-Graf/yara-sigma-rules/issues), submit a pull request, or contact via [Cyber Graf](https://t.me/cyber_graf).
+
+[![GitHub Stars](https://img.shields.io/github/stars/Cyber-Graf/yara-sigma-rules.svg?style=social)](https://github.com/Cyber-Graf/yara-sigma-rules/stargazers)
+[![Telegram](https://img.shields.io/badge/Telegram-Join-blue?logo=telegram)](https://t.me/cyber_graf)
