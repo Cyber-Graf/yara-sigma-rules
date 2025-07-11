@@ -1,0 +1,23 @@
+title: BERT - Shadow Copy Deletion
+id: bert-shadow-delete
+description: Detects deletion of shadow copies used by BERT ransomware
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection:
+    CommandLine|contains:
+      - 'vssadmin delete shadows'
+      - 'wmic shadowcopy delete'
+      - 'powershell'
+      - 'Get-WmiObject Win32_ShadowCopy'
+  condition: selection
+level: high
+tags:
+  - T1490
+  - BERT
+  - ransomware

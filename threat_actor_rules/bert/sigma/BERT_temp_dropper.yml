@@ -1,0 +1,24 @@
+title: BERT - Script Dropper in Temp Folder
+id: bert-temp-dropper
+description: Detects execution of .bat or .ps1 files dropped into %TEMP%, behavior seen in BERT ransomware
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection:
+    CommandLine|contains:
+      - '\\AppData\\Local\\Temp\\'
+    CommandLine|endswith:
+      - '.bat'
+      - '.ps1'
+  condition: selection
+level: medium
+tags:
+  - T1059.003
+  - T1204.002
+  - BERT
+  - initial_access

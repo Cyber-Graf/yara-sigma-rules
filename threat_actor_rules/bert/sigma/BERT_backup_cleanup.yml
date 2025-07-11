@@ -1,0 +1,24 @@
+title: BERT - Backup and Archive File Deletion
+id: bert-backup-cleanup
+description: Detects deletion of common backup files during ransomware activity
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection:
+    CommandLine|contains:
+      - '.bak'
+      - '.zip'
+      - '.7z'
+      - 'del'
+  condition: selection
+level: high
+tags:
+  - T1070
+  - T1485
+  - BERT
+  - file_wiper

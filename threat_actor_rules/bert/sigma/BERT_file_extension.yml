@@ -1,0 +1,19 @@
+title: BERT - Suspicious File Creation with .bert Extension
+id: bert-file-extension
+description: Detects file creation or rename to *.bert, typical for BERT ransomware
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+logsource:
+  category: file_event
+  product: windows
+
+detection:
+  selection:
+    TargetFilename|endswith: '.bert'
+  condition: selection
+level: high
+tags:
+  - T1486
+  - BERT
+  - ransomware
