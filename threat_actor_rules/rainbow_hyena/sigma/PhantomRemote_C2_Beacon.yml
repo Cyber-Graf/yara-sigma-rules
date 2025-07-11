@@ -1,0 +1,25 @@
+title: PhantomRemote C2 User-Agent Beacon
+id: a91df650-d108-46d0-9335-52403c3c09e4
+description: Detects C2 communications using User-Agent strings from PhantomRemote
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: webproxy
+  product: windows
+
+detection:
+  selection:
+    http_user_agent|contains:
+      - "YandexCloud/1.0"
+      - "MicrosoftAppStore/2001.0"
+    url|contains: "poll?id="
+  condition: selection
+
+level: high
+
+tags:
+  - attack.command_and_control
+  - PhantomRemote
+  - C2

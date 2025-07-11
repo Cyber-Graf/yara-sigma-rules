@@ -1,0 +1,26 @@
+title: Suspicious rundll32 Execution from .zip File
+id: 8abf21e4-57a6-4e5e-9ec3-5f7d847fdb65
+description: Detects execution of DLL payloads from inside ZIP containers
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection:
+    Image|endswith: '\rundll32.exe'
+    CommandLine|contains|all:
+      - '.zip'
+      - 'EntryPoint'
+  condition: selection
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.t1218.011
+  - polyglot
+  - PhantomRemote

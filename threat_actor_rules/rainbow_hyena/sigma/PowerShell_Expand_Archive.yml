@@ -1,0 +1,32 @@
+title: PowerShell Expand-Archive Followed by DLL Execution
+id: 5aeec62a-dfb6-4172-8893-91a6547fd8a1
+description: Detects attack chains using PowerShell to extract archive and execute DLL via rundll32
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  step1:
+    Image|endswith: '\powershell.exe'
+    CommandLine|contains:
+      - 'Expand-Archive'
+  step2:
+    Image|endswith: '\rundll32.exe'
+    CommandLine|contains: 'EntryPoint'
+
+  timeframe: 2m
+  condition: step1 and step2
+
+level: high
+
+tags:
+  - attack.defense_evasion
+  - attack.t1059.001
+  - attack.t1218.011
+  - powershell
+  - dll_execution
+  - archive_delivery

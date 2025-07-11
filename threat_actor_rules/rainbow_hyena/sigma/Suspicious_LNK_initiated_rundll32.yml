@@ -1,0 +1,27 @@
+title: Suspicious LNK-initiated rundll32 via PowerShell
+id: 31b94677-bce4-4fef-b2f9-b1210fc05344
+description: Detects malicious shortcut that uses PowerShell to launch a DLL from a disguised ZIP
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection:
+    ParentImage|endswith: '\explorer.exe'
+    Image|endswith: '\powershell.exe'
+    CommandLine|contains:
+      - 'rundll32.exe'
+      - 'EntryPoint'
+  condition: selection
+
+level: high
+
+tags:
+  - attack.initial_access
+  - attack.t1204.002
+  - LNKabuse
+  - PhantomRemote
