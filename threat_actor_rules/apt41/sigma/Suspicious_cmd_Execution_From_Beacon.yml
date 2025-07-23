@@ -1,0 +1,30 @@
+title: Suspicious Cmd Execution From Beacon-like Process
+id: b61e7d47-f43e-47a7-9b36-f032b4f49102
+description: Detects suspicious command execution patterns indicative of Cobalt Strike beaconing
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  parent_proc:
+    ParentImage|endswith:
+      - '\svchost.exe'
+      - '\rundll32.exe'
+  target:
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+  condition: parent_proc and target
+
+level: high
+
+tags:
+  - attack.command_and_control
+  - T1059
+  - cobaltstrike
+  - beacon
+  - apt41

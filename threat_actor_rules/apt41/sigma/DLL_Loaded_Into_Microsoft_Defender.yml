@@ -1,0 +1,28 @@
+title: DLL Loaded Into Microsoft Defender Process
+id: d22e70f7-b38e-4195-901a-61a2d3b3a702
+description: Detects potential sideloading into MsMpEng.exe or MpCmdRun.exe
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  category: image_load
+  product: windows
+
+detection:
+  selection:
+    Image|endswith:
+      - '\MsMpEng.exe'
+      - '\MpCmdRun.exe'
+    ImageLoaded|endswith: '.dll'
+  filter:
+    ImageLoaded|contains: 'Windows Defender'  # legit modules
+  condition: selection and not filter
+
+level: medium
+
+tags:
+  - attack.defense_evasion
+  - attack.t1574.002
+  - apt41
+  - sideloading
