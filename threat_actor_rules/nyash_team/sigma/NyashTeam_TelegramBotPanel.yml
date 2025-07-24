@@ -1,0 +1,28 @@
+title: NyashTeam Telegram Bot Panel Access
+id: nyashteam-telegram-panel-access
+description: Detects web access to Telegram bot control panels linked to NyashTeam
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: webserver
+  category: access
+
+detection:
+  selection:
+    url|contains:
+      - "bot_token"
+      - "chat_id"
+    user_agent|contains:
+      - "curl"
+      - "python-requests"
+  condition: selection
+
+level: medium
+
+tags:
+  - nyashteam
+  - telegram
+  - panel
+  - web

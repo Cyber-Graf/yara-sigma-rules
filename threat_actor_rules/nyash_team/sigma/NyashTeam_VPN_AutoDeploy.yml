@@ -1,0 +1,27 @@
+title: NyashTeam VPN Infrastructure Deployment Script Execution
+id: nyashteam-vpn-auto-setup
+description: Detects execution of VPN deployment scripts commonly used by NyashTeam
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: linux
+  category: process_creation
+
+detection:
+  selection:
+    Image: /bin/bash
+    CommandLine|contains:
+      - "openvpn-install.sh"
+      - "iptables -t nat"
+      - "ufw allow"
+  condition: selection
+
+level: high
+
+tags:
+  - nyashteam
+  - vpn
+  - proxy
+  - shell
