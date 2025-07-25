@@ -1,0 +1,30 @@
+title: io_uring Executable from Temporary Path
+id: 327f903d-1f85-4232-a60a-8fba97f59d67
+description: Detects use of io_uring syscalls by executables in temporary directories
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: linux
+  category: auditd
+
+detection:
+  selection:
+    syscall|contains:
+      - 'io_uring_register'
+      - 'io_uring_enter'
+    exe|startswith:
+      - '/tmp'
+      - '/var/tmp'
+      - '/dev/shm'
+  condition: selection
+
+level: critical
+
+tags:
+  - attack.execution
+  - attack.defense_evasion
+  - io_uring
+  - tmp_exec
+  - shellcode

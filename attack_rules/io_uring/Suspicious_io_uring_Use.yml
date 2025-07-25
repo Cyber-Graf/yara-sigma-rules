@@ -1,0 +1,30 @@
+title: Suspicious io_uring Use by Untrusted Binaries
+id: 684a7f22-2b93-4f5c-b78d-234d8c44dc19
+description: Detects execution of io_uring-related syscalls by unusual binaries — possible EDR evasion
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: linux
+  category: auditd
+
+detection:
+  selection:
+    syscall|contains:
+      - 'io_uring_register'
+      - 'io_uring_enter'
+    exe|not:
+      - '/usr/lib/systemd/systemd'
+      - '/usr/sbin/nginx'
+      - '/usr/bin/sshd'
+  condition: selection
+
+level: high
+
+tags:
+  - attack.defense_evasion
+  - attack.execution
+  - linux
+  - io_uring
+  - edr_bypass
