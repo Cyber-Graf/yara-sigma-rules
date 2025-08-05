@@ -1,0 +1,27 @@
+title: PS_Base64_CobaltStrike_ThreadInject
+id: 51edc55b-4d5e-4539-9d12-8b6248a61a9d
+description: Detects PowerShell execution of a base64-encoded script that uses CreateThread and VirtualAlloc to inject Cobalt Strike Beacon
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  ps_beacon_injection:
+    CommandLine|contains:
+      - "FromBase64String"
+      - "CreateThread"
+      - "VirtualAlloc"
+      - "WriteProcessMemory"
+
+  condition: all of ps_beacon_injection
+
+level: high
+
+tags:
+  - attack.defense_evasion
+  - attack.t1055.001
+  - Storm-2603

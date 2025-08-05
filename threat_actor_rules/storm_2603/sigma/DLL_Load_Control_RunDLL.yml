@@ -1,0 +1,24 @@
+title: DLL_Load_Control_RunDLL
+id: 14f5b586-84d8-47a6-b8c3-fce3789fd2b5
+description: Detects DLL execution using rundll32 with entry point Control_RunDLL — technique used by Storm-2603 for QakBot and Meterpreter payloads
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  dll_entry_control:
+    Image|endswith: "rundll32.exe"
+    CommandLine|contains: "Control_RunDLL"
+
+  condition: all of dll_entry_control
+
+level: high
+
+tags:
+  - attack.defense_evasion
+  - attack.t1218.011
+  - Storm-2603
