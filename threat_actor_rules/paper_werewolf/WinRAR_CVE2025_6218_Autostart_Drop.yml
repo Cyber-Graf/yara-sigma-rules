@@ -1,0 +1,27 @@
+title: WinRAR_CVE2025_6218_Autostart_Drop
+id: 2c2f3b6a-0fd1-4c76-bc7a-cfd51b1b35f3
+description: Detects creation of executables in Startup folder as used by Paper Werewolf exploiting WinRAR CVE-2025-6218
+author: Cyber Graf
+status: experimental
+license: CC BY 4.0
+
+logsource:
+  product: windows
+  category: file_event
+
+detection:
+  selection:
+    TargetFilename|endswith:
+      - "\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\xpsrchvw71.exe"
+      - "\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\xpsrchvw72.exe"
+      - "\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\xpsrchvw73.exe"
+      - "\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\xpsrchvw74.exe"
+
+  condition: selection
+
+level: high
+
+tags:
+  - attack.persistence
+  - attack.t1547.001
+  - paper_werewolf
